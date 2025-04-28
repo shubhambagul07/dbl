@@ -1,0 +1,57 @@
+🧪 PRACTICAL 10 – PL/SQL Block: Display Student Information Using SELECT INTO
+
+—
+
+📌 Step 1: Create Student Table
+
+sql
+Copy
+Edit
+CREATE TABLE Stud (
+  sno INT PRIMARY KEY,
+  sname VARCHAR(50),
+  address VARCHAR(100),
+  city VARCHAR(50)
+);
+📌 Step 2: Insert Sample Data
+
+sql
+Copy
+Edit
+INSERT INTO Stud VALUES
+(1, 'Ravi Kumar', 'MG Road', 'Pune'),
+(2, 'Sneha Shah', 'LBS Marg', 'Mumbai'),
+(3, 'Amit Verma', 'Civil Lines', 'Nagpur');
+📌 Step 3: PL/SQL Block
+
+This block prompts for a roll number (sno) and displays the student's details.
+
+sql
+Copy
+Edit
+DECLARE
+  v_sno Stud.sno%TYPE := &Enter_SNO;
+  v_name Stud.sname%TYPE;
+  v_address Stud.address%TYPE;
+  v_city Stud.city%TYPE;
+BEGIN
+  SELECT sname, address, city INTO v_name, v_address, v_city
+  FROM Stud
+  WHERE sno = v_sno;
+
+  DBMS_OUTPUT.PUT_LINE('Student Details:');
+  DBMS_OUTPUT.PUT_LINE('Name: ' || v_name);
+  DBMS_OUTPUT.PUT_LINE('Address: ' || v_address);
+  DBMS_OUTPUT.PUT_LINE('City: ' || v_city);
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    DBMS_OUTPUT.PUT_LINE('No student found with SNO = ' || v_sno);
+END;
+📌 Output:
+
+If you input: 1
+Output will be: Name: Ravi Kumar
+Address: MG Road
+City: Pune
+
+✅ Practical 10 complete

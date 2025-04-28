@@ -1,0 +1,22 @@
+ PRACTICAL 21 – PL/SQL: Display Student Info Using SELECT INTO (Repeated)
+
+Same as Practical 10. Reuse:
+
+sql
+Copy
+Edit
+DECLARE
+  v_sno Stud.sno%TYPE := &Enter_SNO;
+  v_name Stud.sname%TYPE;
+  v_address Stud.address%TYPE;
+  v_city Stud.city%TYPE;
+BEGIN
+  SELECT sname, address, city INTO v_name, v_address, v_city
+  FROM Stud
+  WHERE sno = v_sno;
+
+  DBMS_OUTPUT.PUT_LINE('Name: ' || v_name);
+  DBMS_OUTPUT.PUT_LINE('Address: ' || v_address);
+  DBMS_OUTPUT.PUT_LINE('City: ' || v_city);
+END;
+✅ Practical 21 complete

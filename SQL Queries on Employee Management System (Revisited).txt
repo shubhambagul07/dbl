@@ -1,0 +1,30 @@
+🧪 PRACTICAL 18 – SQL Queries on Employee Management System (Revisited)
+
+Using same Employee and Department tables.
+
+📌 Example Queries:
+
+Employees in Finance department:
+
+sql
+Copy
+Edit
+SELECT emp_name FROM Employee
+WHERE dept_id = (SELECT dept_id FROM Department WHERE dept_name = 'Finance');
+Top 2 highest salaries:
+
+sql
+Copy
+Edit
+SELECT * FROM Employee
+ORDER BY salary DESC
+FETCH FIRST 2 ROWS ONLY; -- use LIMIT 2 in MySQL
+Group by Department:
+
+sql
+Copy
+Edit
+SELECT dept_id, COUNT(*) AS emp_count
+FROM Employee
+GROUP BY dept_id;
+✅ Practical 18 complete

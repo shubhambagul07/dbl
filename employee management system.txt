@@ -1,0 +1,77 @@
+🧪 PRACTICAL 7 – Employee Management System (SQL Queries)
+
+—
+
+📌 Tables Assumed:
+
+Department(dept_id, dept_name)
+
+Employee(emp_id, emp_name, salary, dept_id)
+
+Step 1: Create Tables
+
+sql
+Copy
+Edit
+CREATE TABLE Department (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(100)
+);
+
+CREATE TABLE Employee (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(100),
+    salary DECIMAL(10,2),
+    dept_id INT,
+    FOREIGN KEY (dept_id) REFERENCES Department(dept_id)
+);
+Step 2: Insert Sample Data
+
+sql
+Copy
+Edit
+-- Department
+INSERT INTO Department VALUES (1, 'HR'), (2, 'IT'), (3, 'Finance');
+
+-- Employee
+INSERT INTO Employee VALUES
+(101, 'Amit', 45000, 1),
+(102, 'Sneha', 55000, 2),
+(103, 'Ravi', 30000, 3),
+(104, 'Pooja', 50000, 2);
+Step 3: Example Queries
+
+Employees with salary > 40000
+
+sql
+Copy
+Edit
+SELECT emp_name, salary FROM Employee WHERE salary > 40000;
+Employees in IT department
+
+sql
+Copy
+Edit
+SELECT emp_name FROM Employee 
+WHERE dept_id = (SELECT dept_id FROM Department WHERE dept_name = 'IT');
+Total salary per department
+
+sql
+Copy
+Edit
+SELECT dept_id, SUM(salary) AS total_salary
+FROM Employee
+GROUP BY dept_id;
+Average salary
+
+sql
+Copy
+Edit
+SELECT AVG(salary) AS average_salary FROM Employee;
+Highest salary employee
+
+sql
+Copy
+Edit
+SELECT * FROM Employee WHERE salary = (SELECT MAX(salary) FROM Employee);
+✅ Practical 7 complete

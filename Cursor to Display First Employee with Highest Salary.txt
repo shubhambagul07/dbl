@@ -1,0 +1,63 @@
+🧪 PRACTICAL 12 – Cursor to Display First Employee with Highest Salary
+
+📌 Assumed Tables:
+
+Emp(eno, ename, department)
+
+Salary(eno, salary)
+
+Step 1: Create and Insert Sample Data
+
+Same tables as before:
+
+sql
+Copy
+Edit
+-- Emp table
+CREATE TABLE Emp (
+  eno INT PRIMARY KEY,
+  ename VARCHAR(100),
+  department VARCHAR(50)
+);
+
+-- Salary table
+CREATE TABLE Salary (
+  eno INT PRIMARY KEY,
+  salary NUMBER(10,2),
+  FOREIGN KEY (eno) REFERENCES Emp(eno)
+);
+
+-- Sample Data
+INSERT INTO Emp VALUES (101, 'Amit', 'HR'), (102, 'Sneha', 'IT'), (103, 'Ravi', 'Finance');
+INSERT INTO Salary VALUES (101, 40000), (102, 50000), (103, 55000);
+Step 2: Cursor Program to Get Employee with Highest Salary
+
+sql
+Copy
+Edit
+DECLARE
+  CURSOR emp_cursor IS
+    SELECT e.eno, e.ename, e.department, s.salary
+    FROM Emp e JOIN Salary s ON e.eno = s.eno
+    ORDER BY s.salary DESC;
+
+  v_eno Emp.eno%TYPE;
+  v_ename Emp.ename%TYPE;
+  v_dept Emp.department%TYPE;
+  v_salary Salary.salary%TYPE;
+BEGIN
+  OPEN emp_cursor;
+  FETCH emp_cursor INTO v_eno, v_ename, v_dept, v_salary;
+
+  DBMS_OUTPUT.PUT_LINE('Highest Paid Employee:');
+  DBMS_OUTPUT.PUT_LINE('ENO: ' || v_eno || ', Name: ' || v_ename || ', Dept: ' || v_dept || ', Salary: ' || v_salary);
+
+  CLOSE emp_cursor;
+END;
+📌 Output:
+
+If employee 103 has the highest salary (₹55,000), output will be:
+
+ENO: 103, Name: Ravi, Dept: Finance, Salary: 55000
+
+✅ Practical 12 complete

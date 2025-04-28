@@ -1,0 +1,90 @@
+🧪 PRACTICAL 11 – PL/SQL Block: Calculate Net Salary
+
+—
+
+📌 Tables Assumed:
+
+Emp(eno, ename, department)
+
+Salary(eno, basic)
+
+NetSalary(eno, netpay)
+
+📌 Step 1: Create Tables
+
+sql
+Copy
+Edit
+CREATE TABLE Emp (
+  eno INT PRIMARY KEY,
+  ename VARCHAR(100),
+  department VARCHAR(50)
+);
+
+CREATE TABLE Salary (
+  eno INT PRIMARY KEY,
+  basic NUMBER(10,2),
+  FOREIGN KEY (eno) REFERENCES Emp(eno)
+);
+
+CREATE TABLE NetSalary (
+  eno INT PRIMARY KEY,
+  netpay NUMBER(10,2),
+  FOREIGN KEY (eno) REFERENCES Emp(eno)
+);
+📌 Step 2: Insert Sample Data
+
+sql
+Copy
+Edit
+INSERT INTO Emp VALUES (101, 'Amit', 'HR'), (102, 'Sneha', 'IT');
+
+INSERT INTO Salary VALUES (101, 40000), (102, 50000);
+📌 Step 3: PL/SQL Code to Calculate Net Salary
+
+Conditions:
+
+DA = 59% of Basic
+
+HRA = ₹500 (Fixed)
+
+IT = 2% of Basic
+
+NetPay = Basic + DA + HRA − IT
+
+Here’s the block:
+
+sql
+Copy
+Edit
+DECLARE
+  v_eno Emp.eno%TYPE := &Enter_ENO;
+  v_basic Salary.basic%TYPE;
+  v_da NUMBER(10,2);
+  v_hra NUMBER(10,2) := 500;
+  v_it NUMBER(10,2);
+  v_netpay NUMBER(10,2);
+BEGIN
+  SELECT basic INTO v_basic
+  FROM Salary
+  WHERE eno = v_eno;
+
+  v_da := v_basic * 0.59;
+  v_it := v_basic * 0.02;
+  v_netpay := v_basic + v_da + v_hra - v_it;
+
+  INSERT INTO NetSalary VALUES (v_eno, v_netpay);
+
+  DBMS_OUTPUT.PUT_LINE('Net salary for Employee ' || v_eno || ' is: ' || v_netpay);
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    DBMS_OUTPUT.PUT_LINE('Employee not found.');
+END;
+📌 Example:
+
+For eno = 101
+Basic = 40000
+DA = 23600, HRA = 500, IT = 800
+NetPay = 40000 + 23600 + 500 − 800 = ₹63,300
+
+✅ Practical 11 complete

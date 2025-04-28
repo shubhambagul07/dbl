@@ -1,0 +1,11 @@
+🧪 PRACTICAL 15, 16, 17 – Repetition of DDL-based Systems (Hotel, Salary, Gym)
+
+These practicals repeat Practical 1, 2, and 3 respectively with similar DDL and normalization. You can reuse and practice the following:
+
+Practical 15 → Hotel Management System → see Practical 1
+
+Practical 16 → Salary Management System → see Practical 2
+
+Practical 17 → Gym Management System → see Practical 3
+
+✅ Practicals 15–17 completed (repeat of earlier systems)

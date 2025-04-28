@@ -1,0 +1,50 @@
+🧪 PRACTICAL 8 – Views and DML using Views
+
+—
+
+Step 1: Create a View on Employee
+
+sql
+Copy
+Edit
+CREATE VIEW Employee_View AS
+SELECT emp_id, emp_name, salary
+FROM Employee;
+Step 2: Select data from the View
+
+sql
+Copy
+Edit
+SELECT * FROM Employee_View;
+Step 3: Insert using View (works only on simple views):
+
+If allowed by DBMS, do:
+
+sql
+Copy
+Edit
+INSERT INTO Employee_View VALUES (105, 'Neha', 47000);
+If not allowed, insert into base table instead.
+
+Step 4: Update using View:
+
+sql
+Copy
+Edit
+UPDATE Employee_View
+SET salary = salary + 2000
+WHERE emp_id = 102;
+Step 5: Delete using View:
+
+sql
+Copy
+Edit
+DELETE FROM Employee_View
+WHERE emp_id = 103;
+📝 Notes:
+
+Views let you control access to sensitive columns.
+
+You can query or modify data using views if they are “simple views” (no joins or aggregations).
+
+✅ Practical 8 complete

@@ -1,0 +1,113 @@
+creating tables 
+CREATE TABLE Book (
+    book_id INT PRIMARY KEY,
+    title VARCHAR(100),
+    author VARCHAR(100),
+    price DECIMAL(10,2),
+    publisher VARCHAR(100),
+    pub_year INT
+);
+
+CREATE TABLE Member (
+    member_id INT PRIMARY KEY,
+    name VARCHAR(100),
+    email VARCHAR(100),
+    phone VARCHAR(15),
+    join_date DATE
+);
+
+CREATE TABLE Borrow (
+    borrow_id INT PRIMARY KEY,
+    member_id INT,
+    book_id INT,
+    borrow_date DATE,
+    return_date DATE,
+    FOREIGN KEY (member_id) REFERENCES Member(member_id),
+    FOREIGN KEY (book_id) REFERENCES Book(book_id)
+);
+
+
+insert into book values 
+-- Books
+INSERT INTO Book VALUES 
+(1, 'DBMS Concepts', 'Elmasri', 550.00, 'Pearson', 2020),
+(2, 'Operating Systems', 'Silberschatz', 620.00, 'Wiley', 2021),
+(3, 'Python Programming', 'Guido', 480.00, 'OReilly', 2022),
+(4, 'C++ Primer', 'Lippman', 700.00, 'Pearson', 2019);
+
+-- Members
+INSERT INTO Member VALUES
+(101, 'Amit Mehta', 'amit@gmail.com', '9876543210', '2023-05-01'),
+(102, 'Riya Shah', 'riya@gmail.com', '9876543222', '2023-06-15');
+
+-- Borrow
+INSERT INTO Borrow VALUES
+(1001, 101, 1, '2024-01-15', '2024-01-20'),
+(1002, 101, 2, '2024-01-17', NULL),
+(1003, 102, 3, '2024-01-18', '2024-01-25');
+
+
+Relational operator (price > 500):
+
+sql
+Copy
+Edit
+SELECT title, price FROM Book WHERE price > 500;
+Boolean operators (AND, OR):
+
+sql
+Copy
+Edit
+SELECT * FROM Book WHERE price > 500 AND publisher = 'Pearson';
+Pattern matching using LIKE:
+
+sql
+Copy
+Edit
+SELECT * FROM Book WHERE title LIKE '%Program%';
+Arithmetic operation (add 10% to all prices):
+
+sql
+Copy
+Edit
+SELECT title, price, price * 1.10 AS price_with_tax FROM Book;
+Built-in Aggregate Functions:
+
+sql
+Copy
+Edit
+SELECT COUNT(*) AS total_books FROM Book;
+SELECT AVG(price) AS avg_price FROM Book;
+SELECT MAX(price) AS most_expensive FROM Book;
+GROUP BY and HAVING (total books per publisher, only show those with more than 1):
+
+sql
+Copy
+Edit
+SELECT publisher, COUNT(*) AS total_books
+FROM Book
+GROUP BY publisher
+HAVING COUNT(*) > 1;
+Date & Time function (current date, duration borrowed):
+
+
+code
+SELECT *, DATEDIFF(CURDATE(), borrow_date) AS days_borrowed
+FROM Borrow
+WHERE return_date IS NULL;
+Set operators (assumes UNION and INTERSECT):
+
+Example: Get all authors and all members' names (UNION):
+
+
+SELECT author AS person FROM Book
+UNION
+SELECT name FROM Member;
+—
+
+✅ You can verify outputs using:
+
+
+SELECT * FROM Book;
+SELECT * FROM Member;
+SELECT * FROM Borrow;

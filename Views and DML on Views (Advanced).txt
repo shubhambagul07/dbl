@@ -1,0 +1,30 @@
+PRACTICAL 19 – Views and DML on Views (Advanced)
+
+Reusing Employee table.
+
+📌 Create a View with SELECT and JOIN
+
+sql
+Copy
+Edit
+CREATE VIEW EmpDeptView AS
+SELECT e.emp_id, e.emp_name, e.salary, d.dept_name
+FROM Employee e
+JOIN Department d ON e.dept_id = d.dept_id;
+📌 Select from View:
+
+sql
+Copy
+Edit
+SELECT * FROM EmpDeptView;
+📌 Try to update via View:
+
+sql
+Copy
+Edit
+UPDATE EmpDeptView
+SET salary = salary + 1000
+WHERE emp_id = 101;
+📌 Note: If your DBMS does not allow updating views with JOINs, use a simple view.
+
+✅ Practical 19 complete

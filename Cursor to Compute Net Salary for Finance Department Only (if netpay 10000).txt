@@ -1,0 +1,69 @@
+🧪 PRACTICAL 13 – Cursor to Compute Net Salary for Finance Department Only (if netpay > 10000)
+
+We’ll extend previous logic and use cursor with condition.
+
+📌 Step 1: Use the same Emp and Salary tables. Add NetSalary table again:
+
+sql
+Copy
+Edit
+CREATE TABLE NetSalary (
+  eno INT PRIMARY KEY,
+  netpay NUMBER(10,2)
+);
+📌 Step 2: Cursor Block to compute NetPay for Finance Department
+
+Logic:
+
+DA = 59% of basic
+
+HRA = ₹500
+
+IT = 2% of basic
+
+Netpay = Basic + DA + HRA - IT
+
+Only insert if department = 'Finance' and netpay > 10000
+
+Here’s the code:
+
+sql
+Copy
+Edit
+DECLARE
+  CURSOR finance_cursor IS
+    SELECT e.eno, e.department, s.salary
+    FROM Emp e JOIN Salary s ON e.eno = s.eno
+    WHERE e.department = 'Finance';
+
+  v_eno Emp.eno%TYPE;
+  v_dept Emp.department%TYPE;
+  v_basic Salary.salary%TYPE;
+  v_da NUMBER(10,2);
+  v_hra NUMBER(10,2) := 500;
+  v_it NUMBER(10,2);
+  v_netpay NUMBER(10,2);
+BEGIN
+  OPEN finance_cursor;
+  LOOP
+    FETCH finance_cursor INTO v_eno, v_dept, v_basic;
+    EXIT WHEN finance_cursor%NOTFOUND;
+
+    v_da := v_basic * 0.59;
+    v_it := v_basic * 0.02;
+    v_netpay := v_basic + v_da + v_hra - v_it;
+
+    IF v_netpay > 10000 THEN
+      INSERT INTO NetSalary VALUES (v_eno, v_netpay);
+      DBMS_OUTPUT.PUT_LINE('Net Salary inserted for Emp No: ' || v_eno || ' = ' || v_netpay);
+    ELSE
+      DBMS_OUTPUT.PUT_LINE('Net salary below threshold for Emp No: ' || v_eno);
+    END IF;
+  END LOOP;
+  CLOSE finance_cursor;
+END;
+📌 Output:
+
+You’ll see inserted net salaries printed for finance department employees who qualify.
+
+✅ Practical 13 complete
