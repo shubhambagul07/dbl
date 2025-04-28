@@ -1,0 +1,54 @@
+🧪 PRACTICAL 5 – Library Management System (SQL Queries)
+
+Example query:
+
+sql
+Copy
+Edit
+SELECT title, price FROM Book WHERE price > 500;
+🔸 Filters books with price greater than 500.
+
+sql
+Copy
+Edit
+SELECT * FROM Book WHERE price > 500 AND publisher = 'Pearson';
+🔸 Boolean condition combining two filters.
+
+sql
+Copy
+Edit
+SELECT * FROM Book WHERE title LIKE '%Program%';
+🔸 Pattern matching using LIKE to find books with “Program” in title.
+
+sql
+Copy
+Edit
+SELECT title, price, price * 1.10 AS price_with_tax FROM Book;
+🔸 Uses arithmetic operation to show price with 10% added tax.
+
+sql
+Copy
+Edit
+SELECT COUNT(*) FROM Book;
+🔸 Aggregate function to count total books.
+
+sql
+Copy
+Edit
+SELECT publisher, COUNT(*) FROM Book GROUP BY publisher;
+🔸 Groups by publisher and counts books for each.
+
+sql
+Copy
+Edit
+SELECT publisher, COUNT(*) FROM Book GROUP BY publisher HAVING COUNT(*) > 1;
+🔸 Adds condition to group result (HAVING).
+
+sql
+Copy
+Edit
+SELECT *, DATEDIFF(CURDATE(), borrow_date) AS days_borrowed
+FROM Borrow WHERE return_date IS NULL;
+🔸 Shows how long books have been borrowed using date functions.
+
+✅ Explanation: Covers relational, Boolean, group functions, date functions, and set operations.
