@@ -1,0 +1,45 @@
+-- Creating Hotel Table
+CREATE TABLE Hotel (
+    hotel_id INT PRIMARY KEY,
+    hotel_name VARCHAR(100) NOT NULL,
+    location VARCHAR(100) NOT NULL
+);
+
+-- Creating Room Table
+CREATE TABLE Room (
+    room_id INT PRIMARY KEY,
+    hotel_id INT,
+    room_number VARCHAR(20) NOT NULL,
+    room_type VARCHAR(50),
+    room_rate DECIMAL(10,2),
+    FOREIGN KEY (hotel_id) REFERENCES Hotel(hotel_id)
+);
+
+-- Creating Guest Table
+CREATE TABLE Guest (
+    guest_id INT PRIMARY KEY,
+    guest_name VARCHAR(100) NOT NULL,
+    guest_phone VARCHAR(15),
+    guest_email VARCHAR(50)
+);
+
+-- Creating Booking Table
+CREATE TABLE Booking (
+    booking_id INT PRIMARY KEY,
+    guest_id INT,
+    room_id INT,
+    check_in_date DATE,
+    check_out_date DATE,
+    FOREIGN KEY (guest_id) REFERENCES Guest(guest_id),
+    FOREIGN KEY (room_id) REFERENCES Room(room_id)
+);
+
+
+to enter values
+INSERT INTO Hotel VALUES (1, 'Taj Hotel', 'Mumbai');
+INSERT INTO Room VALUES (101, 1, 'A101', 'Deluxe', 5000);
+INSERT INTO Guest VALUES (1, 'John Doe', '9876543210', 'john@example.com');
+INSERT INTO Booking VALUES (1, 1, 101, '2025-05-01', '2025-05-05');
+
+
+

@@ -1,0 +1,79 @@
+-- Create Gym Table
+CREATE TABLE Gym (
+    gym_id INT PRIMARY KEY,
+    gym_name VARCHAR(100) NOT NULL,
+    location VARCHAR(100) NOT NULL
+);
+
+-- Create Member Table
+CREATE TABLE Member (
+    member_id INT PRIMARY KEY,
+    member_name VARCHAR(100) NOT NULL,
+    member_phone VARCHAR(15),
+    member_email VARCHAR(100),
+    join_date DATE,
+    gym_id INT,
+    FOREIGN KEY (gym_id) REFERENCES Gym(gym_id)
+);
+
+-- Create Trainer Table
+CREATE TABLE Trainer (
+    trainer_id INT PRIMARY KEY,
+    trainer_name VARCHAR(100) NOT NULL,
+    specialization VARCHAR(100),
+    gym_id INT,
+    FOREIGN KEY (gym_id) REFERENCES Gym(gym_id)
+);
+
+-- Create MembershipPlan Table
+CREATE TABLE MembershipPlan (
+    plan_id INT PRIMARY KEY,
+    plan_name VARCHAR(100) NOT NULL,
+    duration_months INT,
+    fees DECIMAL(10,2)
+);
+
+-- Create Enrollment Table
+CREATE TABLE Enrollment (
+    enrollment_id INT PRIMARY KEY,
+    member_id INT,
+    plan_id INT,
+    enrollment_date DATE,
+    FOREIGN KEY (member_id) REFERENCES Member(member_id),
+    FOREIGN KEY (plan_id) REFERENCES MembershipPlan(plan_id)
+);
+
+
+insert data 
+-- Insert into Gym
+INSERT INTO Gym VALUES (1, 'Fitness First', 'Mumbai'),
+                       (2, 'Gold Gym', 'Pune');
+
+-- Insert into Member
+INSERT INTO Member VALUES
+(201, 'Riya Sharma', '9876543210', 'riya@gmail.com', '2025-05-01', 1),
+(202, 'Aryan Deshmukh', '9876543211', 'aryan@gmail.com', '2025-05-03', 2);
+
+-- Insert into Trainer
+INSERT INTO Trainer VALUES
+(301, 'Rahul Mehra', 'Strength Training', 1),
+(302, 'Sneha Patil', 'Yoga', 2);
+
+-- Insert into MembershipPlan
+INSERT INTO MembershipPlan VALUES
+(401, 'Basic 3 Months', 3, 3000),
+(402, 'Advanced 6 Months', 6, 5500),
+(403, 'Premium 12 Months', 12, 10000);
+
+-- Insert into Enrollment
+INSERT INTO Enrollment VALUES
+(501, 201, 401, '2025-05-02'),
+(502, 202, 402, '2025-05-04');
+
+
+verify table
+SELECT * FROM Gym;
+SELECT * FROM Member;
+SELECT * FROM Trainer;
+SELECT * FROM MembershipPlan;
+SELECT * FROM Enrollment;
