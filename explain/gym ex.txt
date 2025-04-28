@@ -1,0 +1,29 @@
+PRACTICAL 3 – Gym Management System
+
+CODE:
+
+1. CREATE TABLE Gym ( 2.  gym_id INT PRIMARY KEY, 3.  gym_name VARCHAR(100) NOT NULL, 4.  location VARCHAR(100) NOT NULL 5. );
+
+Each gym has a unique ID, name and location.
+
+6. CREATE TABLE Member ( 7.  member_id INT PRIMARY KEY, 8.  member_name VARCHAR(100) NOT NULL, 9.  member_phone VARCHAR(15), 10.  member_email VARCHAR(100), 11.  join_date DATE, 12.  gym_id INT, 13.  FOREIGN KEY (gym_id) REFERENCES Gym(gym_id) 14. );
+
+member_id = unique member.
+
+gym_id connects member to their gym.
+
+15. CREATE TABLE Trainer ( 16.  trainer_id INT PRIMARY KEY, 17.  trainer_name VARCHAR(100) NOT NULL, 18.  specialization VARCHAR(100), 19.  gym_id INT, 20.  FOREIGN KEY (gym_id) REFERENCES Gym(gym_id) 21. );
+
+trainer_id = unique trainer.
+
+specialization = e.g., yoga, cardio.
+
+Linked to gym.
+
+22. CREATE TABLE MembershipPlan ( 23.  plan_id INT PRIMARY KEY, 24.  plan_name VARCHAR(100) NOT NULL, 25.  duration_months INT, 26.  fees DECIMAL(10,2) 27. );
+
+Stores gym plan: name, duration in months, and fee.
+
+28. CREATE TABLE Enrollment ( 29.  enrollment_id INT PRIMARY KEY, 30.  member_id INT, 31.  plan_id INT, 32.  enrollment_date DATE, 33.  FOREIGN KEY (member_id) REFERENCES Member(member_id), 34.  FOREIGN KEY (plan_id) REFERENCES MembershipPlan(plan_id) 35. );
+
+This links members to their plans. Each row = one enrollment.

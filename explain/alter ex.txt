@@ -1,0 +1,29 @@
+PRACTICAL 4 – Alter, Modify, Drop
+
+Basic CREATE:
+
+1. CREATE TABLE Department ( 2.  dept_id INT PRIMARY KEY, 3.  dept_name VARCHAR(100) 4. );
+
+5. CREATE TABLE Employee ( 6.  emp_id INT PRIMARY KEY, 7.  emp_name VARCHAR(100), 8.  salary DECIMAL(10,2), 9.  dept_id INT, 10.  FOREIGN KEY (dept_id) REFERENCES Department(dept_id) 11. );
+
+Alter commands:
+
+12. ALTER TABLE Employee 13. ADD contact_number VARCHAR(15);
+
+Adds a new column to store phone numbers.
+
+14. ALTER TABLE Employee 15. MODIFY emp_name VARCHAR(150);
+
+Increases name column size.
+
+16. ALTER TABLE Employee 17. CHANGE salary emp_salary DECIMAL(10,2);
+
+Renames the column from salary to emp_salary.
+
+Drop:
+
+18. DROP TABLE Employee;
+
+Completely deletes the Employee table and all its data.
+
+✅ That covers full line-by-line explanation for all 4 practicals.

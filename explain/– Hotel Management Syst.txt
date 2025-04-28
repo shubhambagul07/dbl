@@ -1,0 +1,67 @@
+ PRACTICAL 1 – Hotel Management System
+
+CODE:
+
+1. CREATE TABLE Hotel ( 2.  hotel_id INT PRIMARY KEY, 3.  hotel_name VARCHAR(100) NOT NULL, 4.  location VARCHAR(100) NOT NULL 5. );
+
+EXPLANATION:
+
+Line 1: Tells MySQL to create a new table called Hotel.
+
+Line 2: hotel_id is a number (INT), and it’s the primary key (i.e. unique for each hotel).
+
+Line 3: hotel_name is a text column (up to 100 characters). NOT NULL = can’t leave it empty.
+
+Line 4: location is also required, stores city or address of the hotel.
+
+Line 5: Ends the table creation command.
+
+Code continues...
+
+6. CREATE TABLE Room ( 7.  room_id INT PRIMARY KEY, 8.  hotel_id INT, 9.  room_number VARCHAR(20) NOT NULL, 10. room_type VARCHAR(50), 11. room_rate DECIMAL(10,2), 12. FOREIGN KEY (hotel_id) REFERENCES Hotel(hotel_id) 13. );
+
+Explanation:
+
+Line 6: Create Room table.
+
+Line 7: room_id is the unique ID for each room.
+
+Line 8: hotel_id tells us which hotel the room belongs to.
+
+Line 9: room_number (e.g., “101” or “A-05”) is required.
+
+Line 10: Optional text like “Deluxe” or “Standard”.
+
+Line 11: Price of the room (e.g., 5000.00) — supports decimals.
+
+Line 12: Connects hotel_id in Room to hotel_id in Hotel → called a foreign key.
+
+Line 13: Ends the command.
+
+Continue...
+
+14. CREATE TABLE Guest ( 15.  guest_id INT PRIMARY KEY, 16.  guest_name VARCHAR(100) NOT NULL, 17.  guest_phone VARCHAR(15), 18.  guest_email VARCHAR(50) 19. );
+
+Explanation:
+
+guest_id is the guest’s unique number.
+
+guest_name is required.
+
+phone and email are optional.
+
+Next...
+
+20. CREATE TABLE Booking ( 21.  booking_id INT PRIMARY KEY, 22.  guest_id INT, 23.  room_id INT, 24.  check_in_date DATE, 25.  check_out_date DATE, 26.  FOREIGN KEY (guest_id) REFERENCES Guest(guest_id), 27.  FOREIGN KEY (room_id) REFERENCES Room(room_id) 28. );
+
+Explanation:
+
+booking_id: Unique ID for every booking.
+
+guest_id & room_id: Links the guest and room.
+
+Dates: Tracks check-in and check-out.
+
+Foreign keys enforce valid references (only existing guests/rooms can be booked).
+
+✅ Result: These 4 tables fully model a hotel booking system.

@@ -1,0 +1,23 @@
+PRACTICAL 2 – Salary Management System
+
+CODE:
+
+1. CREATE TABLE Department ( 2.  dept_id INT PRIMARY KEY, 3.  dept_name VARCHAR(100) NOT NULL 4. );
+
+Creates Department table. dept_id is unique. dept_name is required.
+
+5. CREATE TABLE Employee ( 6.  emp_id INT PRIMARY KEY, 7.  emp_name VARCHAR(100) NOT NULL, 8.  emp_address VARCHAR(200), 9.  emp_city VARCHAR(50), 10.  dept_id INT, 11.  FOREIGN KEY (dept_id) REFERENCES Department(dept_id) 12. );
+
+emp_id = unique ID for employee.
+
+Links dept_id to Department table (foreign key).
+
+13. CREATE TABLE Salary ( 14.  emp_id INT PRIMARY KEY, 15.  basic_salary DECIMAL(10,2), 16.  da DECIMAL(10,2), 17.  hra DECIMAL(10,2), 18.  it DECIMAL(10,2), 19.  FOREIGN KEY (emp_id) REFERENCES Employee(emp_id) 20. );
+
+Stores salary breakdown: Basic, DA, HRA, Income Tax.
+
+Linked to Employee table via emp_id.
+
+21. CREATE TABLE NetSalary ( 22.  emp_id INT PRIMARY KEY, 23.  total_allowance DECIMAL(10,2), 24.  total_deduction DECIMAL(10,2), 25.  net_pay DECIMAL(10,2), 26.  FOREIGN KEY (emp_id) REFERENCES Employee(emp_id) 27. );
+
+This table stores calculated net pay using salary values
