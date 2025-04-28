@@ -1,0 +1,227 @@
+Excellent! Let’s continue with the line-by-line explanation for:
+
+- Practical 6 – Student Management System SQL queries  
+- Practical 7 – Employee Management System SQL queries  
+- Practical 8 – Views and DML using Views  
+- Practical 9 – PL/SQL block to calculate sum of 100 odd and even numbers  
+- Practical 10 – PL/SQL block to display student information using SELECT INTO (already explained earlier)
+
+Let’s begin:
+
+━━━━━━━━━━━━━━━━━━
+
+🧪 PRACTICAL 6 – Student Management System SQL Queries
+
+1. Create Student Table:
+
+```sql
+CREATE TABLE Student (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(100),
+    course VARCHAR(100),
+    city VARCHAR(50),
+    marks INT
+);
+```
+🔸 Creates a table Student with student_id as the unique identifier.  
+🔸 Stores student name, course enrolled, city of residence, and marks scored.
+
+2. Create Course Table:
+
+```sql
+CREATE TABLE Course (
+    course_id INT PRIMARY KEY,
+    course_name VARCHAR(100),
+    duration INT
+);
+```
+🔸 Stores available courses with a unique ID and duration (in months).
+
+3. Sample SQL Queries:
+
+a) Get all students from Pune:
+
+```sql
+SELECT * FROM Student WHERE city = 'Pune';
+```
+🔸 Filters all records where the city is Pune.
+
+b) Students with marks > 75:
+
+```sql
+SELECT name, marks FROM Student WHERE marks > 75;
+```
+🔸 Shows only names and marks of students who scored above 75.
+
+c) Students whose name starts with ‘R’:
+
+```sql
+SELECT * FROM Student WHERE name LIKE 'R%';
+```
+🔸 Uses pattern matching to find names beginning with 'R'.
+
+d) Count students per course:
+
+```sql
+SELECT course, COUNT(*) FROM Student GROUP BY course;
+```
+🔸 Groups students by course and counts how many are in each.
+
+e) Average marks per course:
+
+```sql
+SELECT course, AVG(marks) FROM Student GROUP BY course;
+```
+🔸 Calculates average marks for each course group.
+
+✅ Practical 6 complete
+
+━━━━━━━━━━━━━━━━━━
+
+🧪 PRACTICAL 7 – Employee Management System SQL Queries
+
+1. Create Tables:
+
+```sql
+CREATE TABLE Department (
+    dept_id INT PRIMARY KEY,
+    dept_name VARCHAR(100)
+);
+```
+🔸 Stores department details.
+
+```sql
+CREATE TABLE Employee (
+    emp_id INT PRIMARY KEY,
+    emp_name VARCHAR(100),
+    salary DECIMAL(10,2),
+    dept_id INT,
+    FOREIGN KEY (dept_id) REFERENCES Department(dept_id)
+);
+```
+🔸 Employee table where dept_id links to Department table.
+
+2. SQL Queries:
+
+a) Employees with salary > 40000:
+
+```sql
+SELECT emp_name, salary FROM Employee WHERE salary > 40000;
+```
+🔸 Filters employees based on salary.
+
+b) Employees in IT department:
+
+```sql
+SELECT emp_name FROM Employee
+WHERE dept_id = (SELECT dept_id FROM Department WHERE dept_name = 'IT');
+```
+🔸 Nested query retrieves the dept_id for IT and then fetches employee names in that department.
+
+c) Total salary per department:
+
+```sql
+SELECT dept_id, SUM(salary) FROM Employee GROUP BY dept_id;
+```
+🔸 Aggregates total salary paid in each department.
+
+d) Average salary:
+
+```sql
+SELECT AVG(salary) FROM Employee;
+```
+🔸 Returns the average salary of all employees.
+
+✅ Practical 7 complete
+
+━━━━━━━━━━━━━━━━━━
+
+🧪 PRACTICAL 8 – Views and DML Using Views
+
+1. Create View:
+
+```sql
+CREATE VIEW Employee_View AS
+SELECT emp_id, emp_name, salary FROM Employee;
+```
+🔸 Creates a virtual table (View) showing a subset of Employee data.
+
+2. Select from View:
+
+```sql
+SELECT * FROM Employee_View;
+```
+🔸 Retrieves all rows from the view.
+
+3. Update data using View:
+
+```sql
+UPDATE Employee_View
+SET salary = salary + 2000
+WHERE emp_id = 102;
+```
+🔸 Increases salary for emp_id 102 by 2000.
+
+4. Insert data (if view is updatable):
+
+```sql
+INSERT INTO Employee_View VALUES (105, 'Neha', 47000);
+```
+🔸 Inserts new record through the view.
+
+5. Delete data using View:
+
+```sql
+DELETE FROM Employee_View WHERE emp_id = 101;
+```
+🔸 Deletes a record using the view (works only if view is simple, not based on joins).
+
+✅ Practical 8 complete
+
+━━━━━━━━━━━━━━━━━━
+
+🧪 PRACTICAL 9 – PL/SQL Block to Calculate Sum of 100 Odd and Even Numbers
+
+PL/SQL Code:
+```sql
+DECLARE
+  i INT := 1;
+  sum_odd INT := 0;
+  sum_even INT := 0;
+BEGIN
+  WHILE i <= 100 LOOP
+    IF MOD(i, 2) = 0 THEN
+      sum_even := sum_even + i;
+    ELSE
+      sum_odd := sum_odd + i;
+    END IF;
+    i := i + 1;
+  END LOOP;
+
+  DBMS_OUTPUT.PUT_LINE('Sum of Even Numbers: ' || sum_even);
+  DBMS_OUTPUT.PUT_LINE('Sum of Odd Numbers: ' || sum_odd);
+END;
+```
+
+Line-by-Line Explanation:
+
+- DECLARE: Starts the block and declares variables.
+- i := 1: Initialize loop counter.
+- sum_odd / sum_even: Accumulators for odd and even sums.
+- WHILE loop: Repeats for i = 1 to 100.
+- MOD(i, 2): Checks if i is even or odd.
+- IF…THEN…ELSE: Adds number to appropriate sum.
+- i := i + 1: Increment loop.
+- DBMS_OUTPUT.PUT_LINE: Prints both totals after loop ends.
+
+Expected output:
+Sum of Even Numbers: 2550  
+Sum of Odd Numbers: 2500
+
+✅ Practical 9 complete
+
+━━━━━━━━━━━━━━━━━━
+
+🧪 PRACTICAL 10 – Already explained earlier here.
+
+Do you want me to continue with line-by-line explanations for Practical 11 onward (PL/SQL: Net Salary, Cursor, etc.)?
