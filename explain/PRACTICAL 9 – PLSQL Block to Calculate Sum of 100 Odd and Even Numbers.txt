@@ -1,0 +1,40 @@
+PRACTICAL 9 – PL/SQL Block to Calculate Sum of 100 Odd and Even Numbers
+
+PL/SQL Code:
+```sql
+DECLARE
+  i INT := 1;
+  sum_odd INT := 0;
+  sum_even INT := 0;
+BEGIN
+  WHILE i <= 100 LOOP
+    IF MOD(i, 2) = 0 THEN
+      sum_even := sum_even + i;
+    ELSE
+      sum_odd := sum_odd + i;
+    END IF;
+    i := i + 1;
+  END LOOP;
+
+  DBMS_OUTPUT.PUT_LINE('Sum of Even Numbers: ' || sum_even);
+  DBMS_OUTPUT.PUT_LINE('Sum of Odd Numbers: ' || sum_odd);
+END;
+```
+
+Line-by-Line Explanation:
+
+- DECLARE: Starts the block and declares variables.
+- i := 1: Initialize loop counter.
+- sum_odd / sum_even: Accumulators for odd and even sums.
+- WHILE loop: Repeats for i = 1 to 100.
+- MOD(i, 2): Checks if i is even or odd.
+- IF…THEN…ELSE: Adds number to appropriate sum.
+- i := i + 1: Increment loop.
+- DBMS_OUTPUT.PUT_LINE: Prints both totals after loop ends.
+
+Expected output:
+Sum of Even Numbers: 2550  
+Sum of Odd Numbers: 2500
+
+✅ Practical 9 complete
+

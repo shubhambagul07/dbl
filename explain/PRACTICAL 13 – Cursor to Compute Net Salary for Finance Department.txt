@@ -1,0 +1,50 @@
+🧪 PRACTICAL 13 – Cursor to Compute Net Salary for Finance Department**
+
+#### **PL/SQL Block:**
+
+```sql
+DECLARE
+  CURSOR finance_cursor IS
+    SELECT e.eno, e.department, s.salary
+    FROM Emp e JOIN Salary s ON e.eno = s.eno
+    WHERE e.department = 'Finance';
+
+  v_eno Emp.eno%TYPE;
+  v_dept Emp.department%TYPE;
+  v_basic Salary.salary%TYPE;
+  v_da NUMBER(10,2);
+  v_hra NUMBER(10,2) := 500;
+  v_it NUMBER(10,2);
+  v_netpay NUMBER(10,2);
+BEGIN
+  OPEN finance_cursor;
+  LOOP
+    FETCH finance_cursor INTO v_eno, v_dept, v_basic;
+    EXIT WHEN finance_cursor%NOTFOUND;
+
+    v_da := v_basic * 0.59;
+    v_it := v_basic * 0.02;
+    v_netpay := v_basic + v_da + v_hra - v_it;
+
+    IF v_netpay > 10000 THEN
+      INSERT INTO NetSalary VALUES (v_eno, v_netpay);
+      DBMS_OUTPUT.PUT_LINE('Net Salary inserted for Emp No: ' || v_eno || ' = ' || v_netpay);
+    ELSE
+      DBMS_OUTPUT.PUT_LINE('Net salary below threshold for Emp No: ' || v_eno);
+    END IF;
+  END LOOP;
+  CLOSE finance_cursor;
+END;
+```
+
+#### **Explanation:**
+
+- **CURSOR finance_cursor IS:** Cursor to fetch employee and salary details for employees in the Finance department.
+- **OPEN finance_cursor:** Opens the cursor for fetching the data.
+- **FETCH finance_cursor INTO:** Fetches employee details.
+- **v_da, v_it, v_netpay:** Calculates DA, IT, and net pay.
+- **INSERT INTO NetSalary:** Inserts the net salary into the `NetSalary` table only if it's greater than 10,000.
+- **DBMS_OUTPUT.PUT_LINE:** Prints the result to output.
+- **CLOSE finance_cursor:** Closes the cursor after processing all records.
+
+---

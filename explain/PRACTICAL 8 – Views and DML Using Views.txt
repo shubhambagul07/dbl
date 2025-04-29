@@ -1,0 +1,41 @@
+🧪 PRACTICAL 8 – Views and DML Using Views
+
+1. Create View:
+
+```sql
+CREATE VIEW Employee_View AS
+SELECT emp_id, emp_name, salary FROM Employee;
+```
+🔸 Creates a virtual table (View) showing a subset of Employee data.
+
+2. Select from View:
+
+```sql
+SELECT * FROM Employee_View;
+```
+🔸 Retrieves all rows from the view.
+
+3. Update data using View:
+
+```sql
+UPDATE Employee_View
+SET salary = salary + 2000
+WHERE emp_id = 102;
+```
+🔸 Increases salary for emp_id 102 by 2000.
+
+4. Insert data (if view is updatable):
+
+```sql
+INSERT INTO Employee_View VALUES (105, 'Neha', 47000);
+```
+🔸 Inserts new record through the view.
+
+5. Delete data using View:
+
+```sql
+DELETE FROM Employee_View WHERE emp_id = 101;
+```
+🔸 Deletes a record using the view (works only if view is simple, not based on joins).
+
+✅ Practical 8 complete

@@ -1,0 +1,46 @@
+🧪 PRACTICAL 14 – General Cursor Implementation**
+
+#### **PL/SQL Block:**
+
+```sql
+DECLARE
+  CURSOR emp_cursor IS
+    SELECT emp_id, emp_name, salary
+    FROM Employee;
+
+  v_id Employee.emp_id%TYPE;
+  v_name Employee.emp_name%TYPE;
+  v_sal Employee.salary%TYPE;
+BEGIN
+  OPEN emp_cursor;
+  LOOP
+    FETCH emp_cursor INTO v_id, v_name, v_sal;
+    EXIT WHEN emp_cursor%NOTFOUND;
+    
+    DBMS_OUTPUT.PUT_LINE('Emp ID: ' || v_id || ', Name: ' || v_name || ', Salary: ' || v_sal);
+  END LOOP;
+  CLOSE emp_cursor;
+END;
+```
+
+#### **Explanation:**
+
+- **CURSOR emp_cursor IS:** Cursor to fetch employee details.
+- **OPEN emp_cursor:** Starts processing the cursor.
+- **FETCH emp_cursor INTO:** Fetches employee data into variables.
+- **DBMS_OUTPUT.PUT_LINE:** Prints employee details.
+- **EXIT WHEN emp_cursor%NOTFOUND:** Stops when no more data is available.
+- **CLOSE emp_cursor:** Closes the cursor.
+
+---
+
+### **🧪 PRACTICAL 15 – Hotel Management System (DDL + Normalization)**
+
+Explanation for **Practical 1** (as seen earlier): 
+
+1. **CREATE TABLE**: Used to create each table (Hotel, Room, Guest, Booking).
+2. **PRIMARY KEY**: Ensures each row in the table is unique.
+3. **FOREIGN KEY**: Links different tables together.
+4. **Normalization**: Ensures no redundant data, each table stores only relevant information.
+
+---

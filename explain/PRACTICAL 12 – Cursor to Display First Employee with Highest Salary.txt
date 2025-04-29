@@ -1,0 +1,36 @@
+ **🧪 PRACTICAL 12 – Cursor to Display First Employee with Highest Salary**
+
+#### **PL/SQL Block:**
+
+```sql
+DECLARE
+  CURSOR emp_cursor IS
+    SELECT e.eno, e.ename, e.department, s.salary
+    FROM Emp e JOIN Salary s ON e.eno = s.eno
+    ORDER BY s.salary DESC;
+
+  v_eno Emp.eno%TYPE;
+  v_ename Emp.ename%TYPE;
+  v_dept Emp.department%TYPE;
+  v_salary Salary.salary%TYPE;
+BEGIN
+  OPEN emp_cursor;
+  FETCH emp_cursor INTO v_eno, v_ename, v_dept, v_salary;
+  
+  DBMS_OUTPUT.PUT_LINE('Highest Paid Employee:');
+  DBMS_OUTPUT.PUT_LINE('ENO: ' || v_eno || ', Name: ' || v_ename || ', Dept: ' || v_dept || ', Salary: ' || v_salary);
+
+  CLOSE emp_cursor;
+END;
+```
+
+#### **Explanation:**
+
+- **CURSOR emp_cursor IS:** Defines a cursor to fetch employee details and their salaries in descending order (highest salary first).
+- **OPEN emp_cursor:** Opens the cursor for execution.
+- **FETCH emp_cursor INTO:** Fetches the first record (highest salary) into the declared variables.
+- **DBMS_OUTPUT.PUT_LINE:** Prints the employee's details (highest salary).
+- **CLOSE emp_cursor:** Closes the cursor after fetching the data.
+
+---
+

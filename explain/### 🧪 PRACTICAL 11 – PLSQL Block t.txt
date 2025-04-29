@@ -1,0 +1,44 @@
+### **🧪 PRACTICAL 11 – PL/SQL Block to Calculate Net Salary**
+
+#### **PL/SQL Block:**
+
+```sql
+DECLARE
+  v_eno Emp.eno%TYPE := &Enter_ENO;
+  v_basic Salary.basic%TYPE;
+  v_da NUMBER(10,2);
+  v_hra NUMBER(10,2) := 500;
+  v_it NUMBER(10,2);
+  v_netpay NUMBER(10,2);
+BEGIN
+  SELECT basic INTO v_basic
+  FROM Salary
+  WHERE eno = v_eno;
+
+  v_da := v_basic * 0.59;
+  v_it := v_basic * 0.02;
+  v_netpay := v_basic + v_da + v_hra - v_it;
+
+  INSERT INTO NetSalary VALUES (v_eno, v_netpay);
+
+  DBMS_OUTPUT.PUT_LINE('Net salary for Employee ' || v_eno || ' is: ' || v_netpay);
+EXCEPTION
+  WHEN NO_DATA_FOUND THEN
+    DBMS_OUTPUT.PUT_LINE('Employee not found.');
+END;
+```
+
+#### **Explanation:**
+
+- **DECLARE:** Starts the PL/SQL block and declares the variables.
+- **v_eno:** A variable to store employee number. The value is prompted from the user.
+- **v_basic:** Stores the basic salary from the Salary table.
+- **v_da, v_hra, v_it, v_netpay:** Variables to store values for Dearness Allowance (DA), House Rent Allowance (HRA), Income Tax (IT), and the calculated net pay.
+- **SELECT INTO:** Fetches the basic salary from the Salary table based on the employee number and stores it in `v_basic`.
+- **v_da, v_it:** Calculates DA as 59% of basic salary and IT as 2% of basic salary.
+- **v_netpay:** Computes the final net salary by adding DA and HRA, and subtracting IT from the basic salary.
+- **INSERT INTO NetSalary:** Inserts the calculated net salary into the `NetSalary` table.
+- **DBMS_OUTPUT.PUT_LINE:** Prints the net salary to the output screen.
+- **EXCEPTION:** If no employee is found, an error message is displayed.
+
+---

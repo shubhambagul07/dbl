@@ -1,0 +1,65 @@
+PRACTICAL 6 – Student Management System SQL Queries
+
+1. Create Student Table:
+
+```sql
+CREATE TABLE Student (
+    student_id INT PRIMARY KEY,
+    name VARCHAR(100),
+    course VARCHAR(100),
+    city VARCHAR(50),
+    marks INT
+);
+```
+🔸 Creates a table Student with student_id as the unique identifier.  
+🔸 Stores student name, course enrolled, city of residence, and marks scored.
+
+2. Create Course Table:
+
+```sql
+CREATE TABLE Course (
+    course_id INT PRIMARY KEY,
+    course_name VARCHAR(100),
+    duration INT
+);
+```
+🔸 Stores available courses with a unique ID and duration (in months).
+
+3. Sample SQL Queries:
+
+a) Get all students from Pune:
+
+```sql
+SELECT * FROM Student WHERE city = 'Pune';
+```
+🔸 Filters all records where the city is Pune.
+
+b) Students with marks > 75:
+
+```sql
+SELECT name, marks FROM Student WHERE marks > 75;
+```
+🔸 Shows only names and marks of students who scored above 75.
+
+c) Students whose name starts with ‘R’:
+
+```sql
+SELECT * FROM Student WHERE name LIKE 'R%';
+```
+🔸 Uses pattern matching to find names beginning with 'R'.
+
+d) Count students per course:
+
+```sql
+SELECT course, COUNT(*) FROM Student GROUP BY course;
+```
+🔸 Groups students by course and counts how many are in each.
+
+e) Average marks per course:
+
+```sql
+SELECT course, AVG(marks) FROM Student GROUP BY course;
+```
+🔸 Calculates average marks for each course group.
+
+✅ Practical 6 complete
